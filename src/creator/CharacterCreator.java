@@ -25,7 +25,7 @@ import com.sun.xml.internal.ws.org.objectweb.asm.Label;
  */
 public class CharacterCreator {
 	private static int Points = 25;
-
+	private static int Level = 1;
 	public static void main(String[] args) {
 		final int WIDTH = 800;
 		final int HEIGHT = 600;
@@ -34,7 +34,8 @@ public class CharacterCreator {
 				"Wisdom", "Charisma"};
 		String[] races = {"Human", "Half-Elf", "Elf", "Dwarf", "Halfling", "Gnome", "Half-Orc"};
 		final int ROWS = 7;
-		final int COLUMNS = 5;
+		final int COLUMNS = 7;
+		
 		HashMap<Integer,String> modifiers = new HashMap<Integer,String>();
 		modifiers.put(7, "-2");
 		modifiers.put(8, "-1");
@@ -180,10 +181,26 @@ public class CharacterCreator {
 			panelHolder[i][4].add(minus);
 		}
 		classDropDown.setVisible(true);
+		JLabel levelLabel = new JLabel("Level: " + Integer.toString(Level));
+		panelHolder[0][3].add(levelLabel);
+		JButton levelUp = new JButton("Level Up");
+		levelUp.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				if(Level <20) {
+					Level++;
+				}
+			}
+			
+		});
+		panelHolder[0][4].add(levelUp);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 		while(true) {
 			pointLabel.setText("Points Remaining: " + Integer.toString(Points));
+			levelLabel.setText("Level: " + Integer.toString(Level));
 		}
 	}
 }
